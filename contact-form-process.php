@@ -1,17 +1,12 @@
 <?php
-//get data from form
+if (isset($_POST['email']) && !empty($_POST['email'])) {
+$subject = "New contact form request";
+$message = $_POST['message'];
+  $headers = 'From: info@website.com' . "\r\n" .
+             'Reply-To: ' . $_POST['email']. "\r\n" .
+             'X-Mailer: PHP/' . phpversion();
 
-$name = $_POST['name'];
-$email= $_POST['email'];
-$message= $_POST['message'];
-$to = "essienpeter57@gmail.com";
-$subject = "Mail From website";
-$txt ="Name = ". $name . "\r\n  Email = " . $email . "\r\n Message =" . $message;
-$headers = "From: noreply@yoursite.com" . "\r\n" .
-"CC: somebodyelse@example.com";
-if($email!=NULL){
-mail($to,$subject,$txt,$headers);
+  mail('essienpeter57@gmail.com', $subject, $message, $headers);
+
+  die('Thank you for your email');
 }
-//redirect
-header("Location:home.html");
-?
